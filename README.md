@@ -1,11 +1,36 @@
+# Parking Control
+
+This simple REST API handles condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
+
+To set up and run the server, you need to create a Postgres database and add a file `/src/main/resources/application.properties` which the following content. Don't forget to replace fields like database name, username, and password.
+
+```
+spring.datasource.url= jdbc:postgresql://localhost:5432/{database_name}
+spring.datasource.username={username}
+spring.datasource.password={password}
+spring.jpa.hibernate.ddl-auto=update
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+```
+
+Now, access the root project and execute the command below to download the Gradle locally.
+```sh 
 gradle wrapper
-gradew bootRun
+```
+Then, run this Gradle task:
+```sh
+./gradlew bootRun
+```
+## REST API Methods
+You might want to access the endpoints using the following cURL commands.
 
-curl http://localhost:8080/parking-spot -s | json_pp
-
-curl http://localhost:8080/parking-spot/70dbacc4-d14c-4537-b1be-4867848b628b -s | json_pp
-
+GET
+```sh
+curl http://localhost:8080/parking-spot
+curl http://localhost:8080/parking-spot/{UUID}
+```
 POST
+```sh
 curl -X POST -H "Content-Type: application/json" \
     -d '{
 	 "parkingSpotNumber": "285B",
@@ -18,10 +43,9 @@ curl -X POST -H "Content-Type: application/json" \
 	 "block": "B"
 	}' \
      http://localhost:8080/parking-spot
-
-GET
-curl http://localhost:8080/parking-spot
-
+```
+UPDATE
+```sh
 curl -X PUT -H "Content-Type: application/json" \
     -d '{
 	 "parkingSpotNumber": "285B",
@@ -33,4 +57,9 @@ curl -X PUT -H "Content-Type: application/json" \
 	 "apartment": "001",
 	 "block": "A"
 	}' \
-     http://localhost:8080/parking-spot/70dbacc4-d14c-4537-b1be-4867848b628b
+     http://localhost:8080/parking-spot/{UUID}
+```
+DELETE
+```sh
+curl -X DELETE http://localhost:8080/parking-spot/{UUID}
+```
