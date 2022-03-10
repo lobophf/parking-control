@@ -1,8 +1,8 @@
 # Parking Control
 
-This simple REST API handles with condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
+This simple REST API handles condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
 
-To set up and run the server, you need to create a Postgres database and add a file `/src/main/resources/application.properties` which the following content. Don't forget to replace the fields with the database name, user, and password.
+To set up and run the server, you need to create a Postgres database and add a file `/src/main/resources/application.properties` which the following content. Don't forget to replace fields like database name, username, and password.
 
 ```
 spring.datasource.url= jdbc:postgresql://localhost:5432/{database_name}
@@ -22,6 +22,8 @@ Then, run this Gradle task:
 ./gradlew bootRun
 ```
 ## REST API Methods
+You might want to access the endpoints using the following cURL commands.
+
 GET
 ```sh
 curl http://localhost:8080/parking-spot
