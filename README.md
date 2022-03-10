@@ -1,6 +1,6 @@
-This simple REST API handles with condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by Michelli Brito on her course.
+This simple REST API handles with condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
 
-To set up and run the server, first access the root project and execute the command below to download the Gradle.
+To set up and run the server, first access the root project and execute the command below to locally download the Gradle.
 ```sh 
 gradle wrapper
 ```
@@ -12,7 +12,7 @@ Then, run this Gradle task:
 GET
 ```sh
 curl http://localhost:8080/parking-spot
-curl http://localhost:8080/parking-spot/{id}
+curl http://localhost:8080/parking-spot/{UUID}
 ```
 POST
 ```sh
@@ -42,9 +42,9 @@ curl -X PUT -H "Content-Type: application/json" \
 	 "apartment": "001",
 	 "block": "A"
 	}' \
-     http://localhost:8080/parking-spot/{id}
+     http://localhost:8080/parking-spot/{UUID}
 ```
 DELETE
 ```sh
-curl -X DELETE http://localhost:8080/parking-spot/{id}
+curl -X DELETE http://localhost:8080/parking-spot/{UUID}
 ```
