@@ -1,6 +1,17 @@
 This simple REST API handles with condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
 
-To set up and run the server, first access the root project and execute the command below to download the Gradle locally.
+To set up and run the server, you need to create a Postgres database and add a file `/src/main/resources/application.properties` which the following content. Don't forget to replace the fields with the database name, user, and password.
+
+```
+spring.datasource.url= jdbc:postgresql://localhost:5432/{database_name}
+spring.datasource.username={username}
+spring.datasource.password={password}
+spring.jpa.hibernate.ddl-auto=update
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+```
+
+Now, access the root project and execute the command below to download the Gradle locally.
 ```sh 
 gradle wrapper
 ```
