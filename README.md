@@ -1,11 +1,21 @@
+This simple REST API handles with condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by Michelli Brito on her course.
+
+To set up and run the server, first access the root project and execute the command below to download the Gradle.
+```sh 
 gradle wrapper
-gradew bootRun
+```
+Then, run this Gradle task:
+```sh
+./gradlew bootRun
+```
 
-curl http://localhost:8080/parking-spot -s | json_pp
-
-curl http://localhost:8080/parking-spot/70dbacc4-d14c-4537-b1be-4867848b628b -s | json_pp
-
+GET
+```sh
+curl http://localhost:8080/parking-spot
+curl http://localhost:8080/parking-spot/{id}
+```
 POST
+```sh
 curl -X POST -H "Content-Type: application/json" \
     -d '{
 	 "parkingSpotNumber": "285B",
@@ -18,10 +28,9 @@ curl -X POST -H "Content-Type: application/json" \
 	 "block": "B"
 	}' \
      http://localhost:8080/parking-spot
-
-GET
-curl http://localhost:8080/parking-spot
-
+```
+UPDATE
+```sh
 curl -X PUT -H "Content-Type: application/json" \
     -d '{
 	 "parkingSpotNumber": "285B",
@@ -33,4 +42,9 @@ curl -X PUT -H "Content-Type: application/json" \
 	 "apartment": "001",
 	 "block": "A"
 	}' \
-     http://localhost:8080/parking-spot/70dbacc4-d14c-4537-b1be-4867848b628b
+     http://localhost:8080/parking-spot/{id}
+```
+DELETE
+```sh
+curl -X DELETE http://localhost:8080/parking-spot/{id}
+```
