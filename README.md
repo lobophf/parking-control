@@ -1,6 +1,6 @@
 This simple REST API handles with condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
 
-To set up and run the server, first access the root project and execute the command below to locally download the Gradle.
+To set up and run the server, first access the root project and execute the command below to download the Gradle locally.
 ```sh 
 gradle wrapper
 ```
