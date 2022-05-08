@@ -1,52 +1,66 @@
 package com.api.parkingcontrol.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ParkingSpotService {
-  
-    final ParkingSpotRepository parkingSpotRepository;
 
-    public ParkingSpotService(ParkingSpotRepository parkingSpotRepository) {
-        this.parkingSpotRepository = parkingSpotRepository;
-    }
+  @Autowired
+  private ParkingSpotRepository parkingSpotRepository;
 
-    @Transactional
-    public Object save(ParkingSpotModel parkingSpotModel) {
-        return parkingSpotRepository.save(parkingSpotModel);
-    }
+  @Transactional
+  public ParkingSpotModel add(ParkingSpotModel parkingSpotModel) {
+    return parkingSpotRepository.save(parkingSpotModel);
+  }
 
-    public boolean existsByLicensePlateCar(String licensePlateCar) {
-        return parkingSpotRepository.existsByLicensePlateCar(licensePlateCar);
-    }
+  public Optional<Object> update(ParkingSpotModel parkingSpotModel, Long id) {
 
-    public boolean existsByParkingSpotNumber(String parkingSpotNumber) {
-        return parkingSpotRepository.existsByParkingSpotNumber(parkingSpotNumber);
-    }
+    return parkingSpotRepository.findById(id).map(record -> {
+      record.setCarPlate(parkingSpotModel.getCarPlate());
+      record.setCarOwner(parkingSpotModel.getCarOwner());
+      record.setCarBrand(parkingSpotModel.getCarBrand());
+      record.setCarColor(parkingSpotModel.getCarColor());
+      record.setParkingSpotNumber(parkingSpotModel.getParkingSpotNumber());
+      record.setApartmentNumber(parkingSpotModel.getApartmentNumber());
+      record.setApartmentBlock(parkingSpotModel.getApartmentBlock());
+      return parkingSpotRepository.save(record);
+    });
+  }
 
-    public boolean existsByApartmentAndBlock(String apartment, String block) {
-        return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
-    }
+  public Object getAll() {
+    return parkingSpotRepository.findAll();
+  }
 
-    public List<ParkingSpotModel> findAll() {
-        return parkingSpotRepository.findAll();
-    }
+  public void delete(long id) {
+    parkingSpotRepository.deleteById(id);
+  }
 
-    public Optional<ParkingSpotModel> findById(UUID id) {
-    	return parkingSpotRepository.findById(id);
-    }
+  public boolean existsParkingSpotById(long id) {
+    return parkingSpotRepository.existsById(id);
+  }
 
-    @Transactional
-    public void delete(ParkingSpotModel parkingSpotModel) {
-    	parkingSpotRepository.delete(parkingSpotModel);
-    }
+  public boolean existsByCarPlate(String carPlate) {
+    return parkingSpotRepository.existsByCarPlate(carPlate);
+  }
+
+  public boolean existsBySpotNumber(String parkingSpotNumber) {
+    return parkingSpotRepository.existsByParkingSpotNumber(parkingSpotNumber);
+  }
+
+  public boolean existsByApartmentNumberAndApartmentBlock(String apartmentNumber, String apartmentBlock) {
+    return parkingSpotRepository.existsByApartmentNumber(apartmentNumber)
+        && parkingSpotRepository.existsByApartmentBlock(apartmentBlock);
+  }
+
+  public Object getById(Long id) {
+    return parkingSpotRepository.findById(id);
+  }
 }

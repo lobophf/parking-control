@@ -1,8 +1,6 @@
 package com.api.parkingcontrol.models;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,124 +8,112 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "TB_PARKING_SPOT")
-public class ParkingSpotModel implements Serializable {
-  private static final long serialVersionUID = 1L;
+@Table(name = "parkingSpot")
+public class ParkingSpotModel {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private UUID id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-  @Column(nullable = false, unique = true, length = 10)
-  private String parkingSpotNumber;
+	@NotNull
+	@Column(length = 8)
+	private String carPlate;
 
-  @Column(nullable = false, unique = true, length = 7)
-  private String licensePlateCar;
+	@NotNull
+	@Column(length = 60)
+	private String carOwner;
 
-  @Column(nullable = false, length = 70)
-  private String brandCar;
+	@NotNull
+	@Column(length = 10)
+	private String carBrand;
 
-  @Column(nullable = false, length = 70)
-  private String modelCar;
+	@NotNull
+	@Column(length = 20)
+	private String carColor;
 
-  @Column(nullable = false, length = 70)
-  private String colorCar;
+	@NotNull
+	@Column(length = 3)
+	private String parkingSpotNumber;
 
-  @Column(nullable = false)
-  private LocalDateTime registrationDate;
+	@NotNull
+	@Column(length = 3)
+	private String apartmentNumber;
 
-  @Column(nullable = false, length = 130)
-  private String responsibleName;
+	@NotNull
+	@Column(length = 1)
+	private String apartmentBlock;
 
-  @Column(nullable = false, length = 30)
-  private String apartment;
+	@NotNull
+	private LocalDateTime registrationDate;
 
-  @Column(nullable = false, length = 10)
-  private String block;
+	public Long getId() {
+		return id;
+	}
 
-  public static long getSerialversionuid() {
-    return serialVersionUID;
-  }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  public UUID getId() {
-    return id;
-  }
+	public String getCarPlate() {
+		return carPlate;
+	}
 
-  public void setId(UUID id) {
-    this.id = id;
-  }
+	public void setCarPlate(String carPlate) {
+		this.carPlate = carPlate;
+	}
 
-  public String getParkingSpotNumber() {
-    return parkingSpotNumber;
-  }
+	public String getCarOwner() {
+		return carOwner;
+	}
 
-  public void setParkingSpotNumber(String parkingSpotNumber) {
-    this.parkingSpotNumber = parkingSpotNumber;
-  }
+	public void setCarOwner(String carOwner) {
+		this.carOwner = carOwner;
+	}
 
-  public String getLicensePlateCar() {
-    return licensePlateCar;
-  }
+	public String getCarBrand() {
+		return carBrand;
+	}
 
-  public void setLicensePlateCar(String licensePlateCar) {
-    this.licensePlateCar = licensePlateCar;
-  }
+	public void setCarBrand(String carBrand) {
+		this.carBrand = carBrand;
+	}
 
-  public String getBrandCar() {
-    return brandCar;
-  }
+	public String getCarColor() {
+		return carColor;
+	}
 
-  public void setBrandCar(String brandCar) {
-    this.brandCar = brandCar;
-  }
+	public void setCarColor(String carColor) {
+		this.carColor = carColor;
+	}
 
-  public String getModelCar() {
-    return modelCar;
-  }
+	public String getParkingSpotNumber() {
+		return parkingSpotNumber;
+	}
 
-  public void setModelCar(String modelCar) {
-    this.modelCar = modelCar;
-  }
+	public void setParkingSpotNumber(String parkingSpotNumber) {
+		this.parkingSpotNumber = parkingSpotNumber;
+	}
 
-  public String getColorCar() {
-    return colorCar;
-  }
+	public String getApartmentNumber() {
+		return apartmentNumber;
+	}
 
-  public void setColorCar(String colorCar) {
-    this.colorCar = colorCar;
-  }
+	public void setApartmentNumber(String apartmentNumber) {
+		this.apartmentNumber = apartmentNumber;
+	}
 
-  public LocalDateTime getRegistrationDate() {
-    return registrationDate;
-  }
+	public String getApartmentBlock() {
+		return apartmentBlock;
+	}
 
-  public void setRegistrationDate(LocalDateTime registrationDate) {
-    this.registrationDate = registrationDate;
-  }
+	public void setApartmentBlock(String apartmentBlock) {
+		this.apartmentBlock = apartmentBlock;
+	}
 
-  public String getResponsibleName() {
-    return responsibleName;
-  }
-
-  public void setResponsibleName(String responsibleName) {
-    this.responsibleName = responsibleName;
-  }
-
-  public String getApartment() {
-    return apartment;
-  }
-
-  public void setApartment(String apartment) {
-    this.apartment = apartment;
-  }
-
-  public String getBlock() {
-    return block;
-  }
-
-  public void setBlock(String block) {
-    this.block = block;
-  }
+	public void setRegistrationDate(LocalDateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 }

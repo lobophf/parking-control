@@ -6,29 +6,64 @@ import javax.validation.constraints.Size;
 public class ParkingSpotDto {
 
   @NotBlank
+  @Size(max = 8)
+  private String carPlate;
+
+  @NotBlank
+  @Size(max = 60)
+  private String carOwner;
+
+  @NotBlank
+  @Size(max = 10)
+  private String carBrand;
+
+  @NotBlank
+  @Size(max = 20)
+  private String carColor;
+
+  @NotBlank
+  @Size(max = 3)
   private String parkingSpotNumber;
 
   @NotBlank
-  @Size(max = 7)
-  private String licensePlateCar;
+  @Size(max = 3)
+  private String apartmentNumber;
 
   @NotBlank
-  private String brandCar;
+  @Size(max = 1)
+  private String apartmentBlock;
 
-  @NotBlank
-  private String modelCar;
+  public String getCarPlate() {
+    return carPlate;
+  }
 
-  @NotBlank
-  private String colorCar;
+  public void setCarPlate(String carPlate) {
+    this.carPlate = carPlate;
+  }
 
-  @NotBlank
-  private String responsibleName;
+  public String getCarOwner() {
+    return carOwner;
+  }
 
-  @NotBlank
-  private String apartment;
+  public void setCarOwner(String carOwner) {
+    this.carOwner = carOwner;
+  }
 
-  @NotBlank
-  private String block;
+  public String getCarBrand() {
+    return carBrand;
+  }
+
+  public void setCarBrand(String carBrand) {
+    this.carBrand = carBrand;
+  }
+
+  public String getCarColor() {
+    return carColor;
+  }
+
+  public void setCarColor(String carColor) {
+    this.carColor = carColor;
+  }
 
   public String getParkingSpotNumber() {
     return parkingSpotNumber;
@@ -38,59 +73,20 @@ public class ParkingSpotDto {
     this.parkingSpotNumber = parkingSpotNumber;
   }
 
-  public String getLicensePlateCar() {
-    return licensePlateCar;
+  public String getApartmentNumber() {
+    return apartmentNumber;
   }
 
-  public void setLicensePlateCar(String licensePlateCar) {
-    this.licensePlateCar = licensePlateCar;
+  public void setApartmentNumber(String apartmentNumber) {
+    this.apartmentNumber = apartmentNumber;
   }
 
-  public String getBrandCar() {
-    return brandCar;
+  public String getApartmentBlock() {
+    return apartmentBlock;
   }
 
-  public void setBrandCar(String brandCar) {
-    this.brandCar = brandCar;
+  public void setApartmentBlock(String apartmentBlock) {
+    this.apartmentBlock = apartmentBlock;
   }
 
-  public String getModelCar() {
-    return modelCar;
-  }
-
-  public void setModelCar(String modelCar) {
-    this.modelCar = modelCar;
-  }
-
-  public String getColorCar() {
-    return colorCar;
-  }
-
-  public void setColorCar(String colorCar) {
-    this.colorCar = colorCar;
-  }
-
-  public String getResponsibleName() {
-    return responsibleName;
-  }
-
-  public void setResponsibleName(String responsibleName) {
-    this.responsibleName = responsibleName;
-  }
-
-  public String getApartment() {
-    return apartment;
-  }
-
-  public void setApartment(String apartment) {
-    this.apartment = apartment;
-  }
-
-  public String getBlock() {
-    return block;
-  }
-
-  public void setBlock(String block) {
-    this.block = block;
-  }
 }
