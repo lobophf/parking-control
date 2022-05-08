@@ -2,18 +2,16 @@
 
 This simple REST API handles condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
 
-To set up and run the server, you need to create a Postgres database and add a file `/src/main/resources/application.properties` which the following content. Don't forget to replace fields like database name, username, and password.
+To set up and run the server, you need to create a MySQL database and add a file `/src/main/resources/application.properties` which the following content. Don't forget to replace fields like database name, username, and password.
 
 ```
-spring.datasource.url= jdbc:postgresql://localhost:5432/{database_name}
-spring.datasource.username={username}
-spring.datasource.password={password}
-spring.jpa.hibernate.ddl-auto=update
-
-spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.jpa.hibernate.ddl-auto=update    
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/{database name}
+spring.datasource.username={user name}    
+spring.datasource.password={user password}    
+spring.datasource.driver-class-name =com.mysql.jdbc.Driver    
 ```
-
-Now, access the root project and execute the command below to download the Gradle locally.
+Now, go to the root project and run the command below to download a specific version of Gradle locally.
 ```sh 
 gradle wrapper
 ```
@@ -27,20 +25,19 @@ You might want to access the endpoints using the following cURL commands.
 GET
 ```sh
 curl http://localhost:8080/parking-spot
-curl http://localhost:8080/parking-spot/{UUID}
+curl http://localhost:8080/parking-spot/{id}
 ```
 POST
 ```sh
 curl -X POST -H "Content-Type: application/json" \
     -d '{
-	 "parkingSpotNumber": "285B",
-	 "licensePlateCar": "RRS9870",
-	 "brandCar": "Audi",
-	 "modelCar": "q5",
-	 "colorCar": "black",
-	 "responsibleName": "Taffarel",
-	 "apartment": "001",
-	 "block": "B"
+	 "carPlate": "SXD-7621",
+	 "carOwner": "Taffarel",
+	 "carColor": "Black",
+	 "carBrand": "BMW",
+	 "apartmentNumber": "23",
+	 "apartmentBlock": "1",
+	 "parkingSpotNumber": 2
 	}' \
      http://localhost:8080/parking-spot
 ```
@@ -48,18 +45,17 @@ UPDATE
 ```sh
 curl -X PUT -H "Content-Type: application/json" \
     -d '{
-	 "parkingSpotNumber": "285B",
-	 "licensePlateCar": "UUX1229",
-	 "brandCar": "BMW",
-	 "modelCar": "XL",
-	 "colorCar": "White",
-	 "responsibleName": "Tardelli",
-	 "apartment": "001",
-	 "block": "A"
+	 "carPlate": "SXD-7621",
+	 "carOwner": "Taffarel",
+	 "carColor": "Black",
+	 "carBrand": "BMW",
+	 "apartmentNumber": "23",
+	 "apartmentBlock": "1",
+	 "parkingSpotNumber": 2
 	}' \
-     http://localhost:8080/parking-spot/{UUID}
+http://localhost:8080/parking-spot/{id}
 ```
 DELETE
 ```sh
-curl -X DELETE http://localhost:8080/parking-spot/{UUID}
+curl -X DELETE http://localhost:8080/parking-spot/{id}
 ```
