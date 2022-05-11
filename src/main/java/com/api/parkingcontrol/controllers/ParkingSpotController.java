@@ -43,7 +43,7 @@ public class ParkingSpotController {
     if (parkingSpotService.existsByApartmentNumberAndApartmentBlock(parkingSpotDto.getApartmentNumber(),
         parkingSpotDto.getApartmentBlock())) {
       return ResponseEntity.status(HttpStatus.CONFLICT)
-          .body("Conflict: Parking Spot already resgistered for this apartment/ block.");
+          .body("Conflict: The parking Spot is already resgistered for this apartment/ block.");
     }
 
     ParkingSpotModel parkingSpotModel = new ParkingSpotModel();
@@ -69,7 +69,7 @@ public class ParkingSpotController {
     if (parkingSpotService.existsByApartmentNumberAndApartmentBlock(parkingSpotDto.getApartmentNumber(),
         parkingSpotDto.getApartmentBlock())) {
       return ResponseEntity.status(HttpStatus.CONFLICT)
-          .body("Conflict: Parking Spot already resgistered for this apartment/ block.");
+          .body("Conflict: The parking Spot is already resgistered for this apartment/ block.");
     }
 
     ParkingSpotModel parkingSpotModel = new ParkingSpotModel();
@@ -98,6 +98,6 @@ public class ParkingSpotController {
     }
 
     parkingSpotService.delete(id);
-    return ResponseEntity.status(HttpStatus.OK).body("The quotation was seccesfully deleted.");
+    return ResponseEntity.status(HttpStatus.OK).body("The parking spot was seccesfully deleted.");
   }
 }
