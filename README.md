@@ -2,7 +2,7 @@
 
 This simple REST API handles condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
 
-To set up and run the server, you need to create a MySQL database and add a file `/src/main/resources/application.properties` which the following content. Don't forget to replace fields like database name, username, and password.
+To set up and run the server, you need to create a MySQL database, add a file `/src/main/resources/application.properties` which the following content, and grant permissions to the user as well. Don't forget to replace fields like database name, username, and password.
 
 ```
 spring.jpa.hibernate.ddl-auto=update    
@@ -45,13 +45,13 @@ UPDATE
 ```sh
 curl -X PUT -H "Content-Type: application/json" \
     -d '{
-	 "carPlate": "SXD-7621",
-	 "carOwner": "Taffarel",
-	 "carColor": "Black",
-	 "carBrand": "BMW",
-	 "apartmentNumber": "23",
-	 "apartmentBlock": "1",
-	 "parkingSpotNumber": 2
+	 "carPlate": "XYZ-8791",
+	 "carOwner": "Tardelli",
+	 "carColor": "Silver",
+	 "carBrand": "Mercedes",
+	 "apartmentNumber": "13",
+	 "apartmentBlock": "2",
+	 "parkingSpotNumber": 35
 	}' \
 http://localhost:8080/parking-spot/{id}
 ```
