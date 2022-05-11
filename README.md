@@ -37,7 +37,7 @@ curl -X POST -H "Content-Type: application/json" \
 	 "carBrand": "BMW",
 	 "apartmentNumber": "23",
 	 "apartmentBlock": "1",
-	 "parkingSpotNumber": 2
+	 "parkingSpotNumber": "2"
 	}' \
      http://localhost:8080/parking-spot
 ```
@@ -51,7 +51,7 @@ curl -X PUT -H "Content-Type: application/json" \
 	 "carBrand": "Mercedes",
 	 "apartmentNumber": "13",
 	 "apartmentBlock": "2",
-	 "parkingSpotNumber": 35
+	 "parkingSpotNumber": "35"
 	}' \
 http://localhost:8080/parking-spot/{id}
 ```
