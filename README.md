@@ -2,7 +2,7 @@
 
 This simple REST API handles condos' park spots. It's an open-source Spring Boot project slightly different from the original one made by [@Michelli Brito](https://github.com/MichelliBrito) on her [course](https://www.youtube.com/watch?v=LXRU-Z36GEU).
 
-To set up and run the server, you need to create a MySQL database, add a file `/src/main/resources/application.properties` which the following content, and grant permissions to the user as well. Don't forget to replace fields like database name, username, and password.
+To set up and run the server, you need to create a MySQL database, add a file `/src/main/resources/application.properties` which the following content, and grant permissions to the MySQL user as well. Don't forget to replace fields like database name, username, and password.
 
 ```
 spring.jpa.hibernate.ddl-auto=update    
