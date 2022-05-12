@@ -1,14 +1,8 @@
 package com.api.parkingcontrol.controllers;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
-import javax.validation.Valid;
-
 import com.api.parkingcontrol.dtos.ParkingSpotDto;
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.services.ParkingSpotService;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @RestController
 @RequestMapping("/parking-spot")
@@ -84,20 +82,16 @@ public class ParkingSpotController {
   public ResponseEntity<Object> getAll() {
     return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.getAll());
   }
-  
+
   @GetMapping("/{id}")
   public ResponseEntity<Object> getById(@PathVariable(value = "id") long id) {
     return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.getById(id));
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<String> remove(@PathVariable(value = "id") long id) {
-
-    if (!parkingSpotService.existsParkingSpotById(id)) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking spot not found.");
-    }
-
+  public ResponseEntity remove(@PathVariable(value = "id") long id) {
     parkingSpotService.delete(id);
-    return ResponseEntity.status(HttpStatus.OK).body("The parking spot was seccesfully deleted.");
+    return ResponseEntity.noContent().build();
   }
+
 }
