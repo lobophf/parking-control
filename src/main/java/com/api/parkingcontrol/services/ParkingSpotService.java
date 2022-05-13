@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.api.parkingcontrol.exception.SpotNotFoundException;
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepository;
 
@@ -40,11 +41,16 @@ public class ParkingSpotService {
   }
 
   public void delete(long id) {
+    this.existsParkingSpotById(id);
     parkingSpotRepository.deleteById(id);
   }
 
   public boolean existsParkingSpotById(long id) {
-    return parkingSpotRepository.existsById(id);
+    if (parkingSpotRepository.existsById(id)) {
+      return true;
+    } else {
+      throw new SpotNotFoundException(id);
+    }
   }
 
   public boolean existsByCarPlate(String carPlate) {
