@@ -1,8 +1,13 @@
 package com.api.parkingcontrol.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@Getter
+@Setter
 public class ParkingSpotDto {
 
   @NotBlank
@@ -32,61 +37,5 @@ public class ParkingSpotDto {
   @NotBlank
   @Size(max = 1)
   private String apartmentBlock;
-
-  public String getCarPlate() {
-    return carPlate;
-  }
-
-  public void setCarPlate(String carPlate) {
-    this.carPlate = carPlate;
-  }
-
-  public String getCarOwner() {
-    return carOwner;
-  }
-
-  public void setCarOwner(String carOwner) {
-    this.carOwner = carOwner;
-  }
-
-  public String getCarBrand() {
-    return carBrand;
-  }
-
-  public void setCarBrand(String carBrand) {
-    this.carBrand = carBrand;
-  }
-
-  public String getCarColor() {
-    return carColor;
-  }
-
-  public void setCarColor(String carColor) {
-    this.carColor = carColor;
-  }
-
-  public String getParkingSpotNumber() {
-    return parkingSpotNumber;
-  }
-
-  public void setParkingSpotNumber(String parkingSpotNumber) {
-    this.parkingSpotNumber = parkingSpotNumber;
-  }
-
-  public String getApartmentNumber() {
-    return apartmentNumber;
-  }
-
-  public void setApartmentNumber(String apartmentNumber) {
-    this.apartmentNumber = apartmentNumber;
-  }
-
-  public String getApartmentBlock() {
-    return apartmentBlock;
-  }
-
-  public void setApartmentBlock(String apartmentBlock) {
-    this.apartmentBlock = apartmentBlock;
-  }
 
 }
