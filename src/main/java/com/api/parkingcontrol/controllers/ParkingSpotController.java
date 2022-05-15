@@ -1,6 +1,7 @@
 package com.api.parkingcontrol.controllers;
 
 import com.api.parkingcontrol.dtos.ParkingSpotDto;
+import com.api.parkingcontrol.exception.ValidationConflictException;
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.services.ParkingSpotService;
 import org.springframework.beans.BeanUtils;
@@ -27,22 +28,18 @@ public class ParkingSpotController {
   @Autowired
   private ParkingSpotService parkingSpotService;
 
+
+  /*
+   * Here we can find some duplicated code (lines 38-55 and 64-81) that can be refactored to be reusable.
+   *
+   * Observe that for each validation, the same HttpStatus code is being returned, changing only the body information.
+   * You could opt here to create a new method that will be responsible to do these verifications, and then throw an exception.
+   * This would allow you to treat this exception in the CustomExceptionHandler, also permitting the reuse of these functions.
+   */
+
   @PostMapping
   public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto) {
-
-    if (parkingSpotService.existsByCarPlate(parkingSpotDto.getCarPlate())) {
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: The car is already parked.");
-    }
-
-    if (parkingSpotService.existsBySpotNumber(parkingSpotDto.getParkingSpotNumber())) {
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: The parking spot is already in use.");
-    }
-
-    if (parkingSpotService.existsByApartmentNumberAndApartmentBlock(parkingSpotDto.getApartmentNumber(),
-        parkingSpotDto.getApartmentBlock())) {
-      return ResponseEntity.status(HttpStatus.CONFLICT)
-          .body("Conflict: The parking Spot is already resgistered for this apartment/ block.");
-    }
+    this.validateParkingSpotInformation(parkingSpotDto);
 
     ParkingSpotModel parkingSpotModel = new ParkingSpotModel();
 
@@ -56,19 +53,7 @@ public class ParkingSpotController {
   public ResponseEntity<Object> replace(@RequestBody @Valid ParkingSpotDto parkingSpotDto,
       @PathVariable(value = "id") Long id) {
 
-    if (parkingSpotService.existsByCarPlate(parkingSpotDto.getCarPlate())) {
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: The car is already parked.");
-    }
-
-    if (parkingSpotService.existsBySpotNumber(parkingSpotDto.getParkingSpotNumber())) {
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: The parking spot is already in use.");
-    }
-
-    if (parkingSpotService.existsByApartmentNumberAndApartmentBlock(parkingSpotDto.getApartmentNumber(),
-        parkingSpotDto.getApartmentBlock())) {
-      return ResponseEntity.status(HttpStatus.CONFLICT)
-          .body("Conflict: The parking Spot is already resgistered for this apartment/ block.");
-    }
+    this.validateParkingSpotInformation(parkingSpotDto);
 
     ParkingSpotModel parkingSpotModel = new ParkingSpotModel();
 
@@ -92,6 +77,21 @@ public class ParkingSpotController {
   public ResponseEntity remove(@PathVariable(value = "id") long id) {
     parkingSpotService.delete(id);
     return ResponseEntity.noContent().build();
+  }
+
+  private void validateParkingSpotInformation(ParkingSpotDto parkingSpotDto) {
+    if (parkingSpotService.existsByCarPlate(parkingSpotDto.getCarPlate())) {
+      throw new ValidationConflictException("Conflict: The car is already parked.");
+    }
+
+    if (parkingSpotService.existsBySpotNumber(parkingSpotDto.getParkingSpotNumber())) {
+      throw new ValidationConflictException("Conflict: The parking spot is already in use.");
+    }
+
+    if (parkingSpotService.existsByApartmentNumberAndApartmentBlock(parkingSpotDto.getApartmentNumber(),
+            parkingSpotDto.getApartmentBlock())) {
+      throw new ValidationConflictException("Conflict: The parking Spot is already resgistered for this apartment/ block.");
+    }
   }
 
 }
