@@ -21,4 +21,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
   }
 
+  @ExceptionHandler(ValidationConflictException.class)
+  public final ResponseEntity<ErrorDetails> handleValidationConflictException(ValidationConflictException ex,
+                                                                              WebRequest request) {
+    ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(),
+            request.getDescription(false));
+    return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
+  }
 }

@@ -1,5 +1,8 @@
 package com.api.parkingcontrol.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -10,8 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/*
+ * With the intention to reduce excessive code and help, you can opt to use Lombok annotations.
+ * It will generate the correspondent getters and setter for each member variable declared in the class.
+ * You can read more about lombok on their website: https://projectlombok.org/features/all
+ */
 @Entity
 @Table(name = "parkingSpot")
+@Getter
+@Setter
 public class ParkingSpotModel {
 
 	@Id
@@ -48,72 +58,4 @@ public class ParkingSpotModel {
 
 	@NotNull
 	private LocalDateTime registrationDate;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getCarPlate() {
-		return carPlate;
-	}
-
-	public void setCarPlate(String carPlate) {
-		this.carPlate = carPlate;
-	}
-
-	public String getCarOwner() {
-		return carOwner;
-	}
-
-	public void setCarOwner(String carOwner) {
-		this.carOwner = carOwner;
-	}
-
-	public String getCarBrand() {
-		return carBrand;
-	}
-
-	public void setCarBrand(String carBrand) {
-		this.carBrand = carBrand;
-	}
-
-	public String getCarColor() {
-		return carColor;
-	}
-
-	public void setCarColor(String carColor) {
-		this.carColor = carColor;
-	}
-
-	public String getParkingSpotNumber() {
-		return parkingSpotNumber;
-	}
-
-	public void setParkingSpotNumber(String parkingSpotNumber) {
-		this.parkingSpotNumber = parkingSpotNumber;
-	}
-
-	public String getApartmentNumber() {
-		return apartmentNumber;
-	}
-
-	public void setApartmentNumber(String apartmentNumber) {
-		this.apartmentNumber = apartmentNumber;
-	}
-
-	public String getApartmentBlock() {
-		return apartmentBlock;
-	}
-
-	public void setApartmentBlock(String apartmentBlock) {
-		this.apartmentBlock = apartmentBlock;
-	}
-
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
-	}
 }

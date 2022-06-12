@@ -1,5 +1,6 @@
 package com.api.parkingcontrol.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -22,8 +23,15 @@ public class ParkingSpotService {
     return parkingSpotRepository.save(parkingSpotModel);
   }
 
-  public Optional<Object> update(ParkingSpotModel parkingSpotModel, Long id) {
+  /*
+   * Prefer to use a specific type of return over the object type.
+   * This way the caller method will know exactly what to expect as return.
+   * Also enabling you to access the methods and variable from its class.
+   * It also prevents further mistakes, as changing the return type accidentally.
+   */
+  public Optional<ParkingSpotModel> update(ParkingSpotModel parkingSpotModel, Long id) {
 
+    // If you want, you could achieve this merge of objects using MapStruct.
     return parkingSpotRepository.findById(id).map(record -> {
       record.setCarPlate(parkingSpotModel.getCarPlate());
       record.setCarOwner(parkingSpotModel.getCarOwner());
@@ -36,7 +44,7 @@ public class ParkingSpotService {
     });
   }
 
-  public Object getAll() {
+  public List<ParkingSpotModel> getAll() {
     return parkingSpotRepository.findAll();
   }
 
@@ -66,7 +74,7 @@ public class ParkingSpotService {
         && parkingSpotRepository.existsByApartmentBlock(apartmentBlock);
   }
 
-  public Object getById(Long id) {
+  public Optional<ParkingSpotModel> getById(Long id) {
     return parkingSpotRepository.findById(id);
   }
 }
